@@ -42,6 +42,7 @@
     "panini": "^1.3.0",
     "rimraf": "^2.3.3",
     "siphon-media-query": "^1.0.0",
-    "yargs": "^4.1.0"
+    "yargs": "^4.1.0",
+    "gulp-prettify": "^0.4.0"
   }
 }

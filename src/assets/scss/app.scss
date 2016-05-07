@@ -1,2 +1,33 @@
 @import 'settings';
 @import 'foundation';
+
+.top {
+    background-color: $body-background !important;
+
+    th.columns {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    th.last th {
+        text-align: right;
+    }
+
+    p {
+        font-size: 12px;
+        margin-bottom: 0px;
+    }
+
+    a {
+        font-size: 12px;
+    }
+}
+
+.footer {
+    background-color: $body-background !important;
+
+    td {
+        text-align: center;
+        font-size: 12px;
+    }
+}
