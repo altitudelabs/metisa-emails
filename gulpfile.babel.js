@@ -23,7 +23,7 @@ var CONFIG;
 
 // Build the "dist" folder by running all of the above tasks
 gulp.task('build',
-  gulp.series(clean, pages, sass, images, prettify, inline));
+  gulp.series(clean, pages, sass, images, inline));
 
 // Build emails, run the server, and watch for file changes
 gulp.task('default',
@@ -74,13 +74,6 @@ function sass() {
     .pipe(gulp.dest('dist/css'));
 }
 
-// Make HTML pretty
-function prettify() {
-  return gulp.src('dist/**/*.html')
-    .pipe($.prettify({ indent_size: 4 }))
-    .pipe(gulp.dest('dist'));
-}
-
 // Copy and compress images
 function images() {
   return gulp.src('src/assets/img/**/*')
@@ -92,6 +85,7 @@ function images() {
 function inline() {
   return gulp.src('dist/**/*.html')
     .pipe($.if(PRODUCTION, inliner('dist/css/app.css')))
+    .pipe($.prettify({ indent_size: 4 }))
     .pipe(gulp.dest('dist'));
 }
 
@@ -122,11 +116,11 @@ function inliner(css) {
     //   removeStyleTags: false,
     //   removeLinkTags: false
     // })
-    .pipe($.replace, '<!-- <style> -->', `<style>${mqCss}</style>`)
-    .pipe($.htmlmin, {
-      collapseWhitespace: false,
-      minifyCSS: true
-    });
+    .pipe($.replace, '<!-- <style> -->', `<style>${css}</style>`);
+    // .pipe($.htmlmin, {
+    //   collapseWhitespace: false,
+    //   minifyCSS: true
+    // });
 
   return pipe();
 }

@@ -31,3 +31,58 @@
         font-size: 12px;
     }
 }
+
+.recommendation {
+    img {
+        margin-bottom: 5px;
+    }
+
+    h5 {
+        font-size: 16px;
+        margin-bottom: 0px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}
+
+.banner {
+    background-color: $primary-color;
+
+    .callout {
+        margin-top: 16px;
+        margin-bottom: 0px;
+
+        .callout-inner {
+            padding: 30px 15px 15px;
+            background-color: $primary-color;
+            border: 2px solid #fff;
+
+            h2 {
+                color: #fff;
+                font-weight: 200;
+            }
+
+            h1 {
+                color: #fff;
+                text-transform: uppercase;
+                font-weight: bold;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+
+            h6 {
+                color: #fff;
+                text-transform: uppercase;
+                margin-bottom: 30px;
+            }
+        }
+    }
+}
+
+.button.inverse {
+    background-color: none;
+    border: 1px solid #fff;
+    border-radius: 0px;
+}
