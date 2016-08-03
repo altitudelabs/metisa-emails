@@ -64,17 +64,33 @@ a {
         padding-bottom: 10px;
     }
 
-    th.last th {
+    th.archive th {
         text-align: right;
     }
 
     p {
-        font-size: 12px;
+        color: $medium-gray;
+        font-size: 11px;
         margin-bottom: 0px;
     }
 
     a {
-        font-size: 12px;
+        color: $medium-gray;
+        font-size: 11px;
+    }
+
+    @media only screen and (max-width: 596px) {
+        th.archive {
+            padding-top: 0px;
+
+            th {
+                text-align: left;
+            }
+        }
+
+        th.preview {
+            padding-bottom: 0px;
+        }
     }
 }
 
@@ -91,15 +107,28 @@ a {
 }
 
 .logo {
-    img {
-        margin: auto;
-        width: 200px;
+    th {
+        text-align: center;
+        padding-top: 30px;
+
+        .brand {
+            font-family: Georgia, serif;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 5px;
+            color: $medium-gray;
+            text-decoration: none;
+        }
     }
+}
+
+.signature {
+    color: $medium-gray;
 }
 
 .footer {
     background-color: white !important;
-    font-size: 10px;
+    font-size: 11px;
 
     th.columns {
         padding-top: 10px;
@@ -108,22 +137,29 @@ a {
 
     th {
         text-align: center;
-        font-size: 12px;
-        color: #A0A0A0;
+        font-size: 11px;
+        color: $medium-gray;
     }
 
     a {
-        color: black;
+        color: $medium-gray;
         text-decoration: underline;
-        font-size: 10px;
+        font-size: 11px;
         text-align: center;
     }
 
     p {
-        font-size: 10px;
+        color: $medium-gray;
+        font-size: 11px;
         text-align: center;
         line-height: 1.2;
-    } 
+    }
+
+    .footer-text {
+        p {
+            margin-bottom: 15px;
+        }
+    }
 }
 
 .recommendation {
@@ -153,16 +189,13 @@ a {
     }
 }
 
-.line {
-    hr {
-        border: 0;
-        height: 2px;
-        background-image: linear-gradient(to right, rgba(100,100,100, 0), rgba(100,100,100, 0.75), rgba(100,100,100, 0));
-    }
+hr {
+    width: 94%;
+    border: 1px solid $light-gray;
 }
 
 .midsignature {
-    width: 100px; 
+    width: 100px;
     margin: auto;
 }
 
