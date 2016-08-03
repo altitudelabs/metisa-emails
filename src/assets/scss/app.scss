@@ -1,51 +1,101 @@
 @import 'settings';
 @import 'foundation';
 
+h1 {
+    color: $primary-color;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+h2 {
+    color: $dark-gray;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+h3 {
+    color: #fff;
+    font-weight: lighter;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h4 {
+    color: $dark-gray;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-transform: lowercase;
+    font-family: Times;
+    font-style: italic;
+    text-align: center;
+}
+
+h5 {
+    font-weight: bold;
+    color: $dark-gray;
+}
+
+h6 {
+    font-weight: lighter;
+    color: $dark-gray;
+}
+
+p {
+    font-size: $global-font-size;
+    margin-bottom: 0px;
+    hyphens: none;
+}
+
+a {
+    font-size: $top-font-size;
+    color: black;
+    text-decoration: underline;
+    text-align: center;
+}
+
 .top {
-    background-color: $body-background !important;
+    background-color: $white !important;
 
     th.columns {
         padding-top: 10px;
         padding-bottom: 10px;
     }
 
-    th.last th {
+    th.archive th {
         text-align: right;
     }
 
     p {
-        font-size: 12px;
+        color: $medium-gray;
+        font-size: 11px;
         margin-bottom: 0px;
     }
 
     a {
-        font-size: 12px;
+        color: $medium-gray;
+        font-size: 11px;
     }
-}
 
-.footer {
-    background-color: $body-background !important;
+    @media only screen and (max-width: 596px) {
+        th.archive {
+            padding-top: 0px;
 
-    th {
-        text-align: center;
-        font-size: 12px;
-        color: #A0A0A0;
-    }
-}
-
-.logo {
-    th.columns {
-        padding-top: 20px;
-        th {
-            text-align: center;
-            img {
-                display: inline-block;
+            th {
+                text-align: left;
             }
+        }
+
+        th.preview {
+            padding-bottom: 0px;
         }
     }
 }
 
 .header {
+    background-color: $white;
     th.columns {
         th {
             text-align: center;
@@ -56,39 +106,58 @@
     }
 }
 
-.content {
-    .timestamp {
-        text-align: right;
-        font-size: 14px;
-        color: $medium-gray;
-        margin-bottom: 25px;
+.logo {
+    th {
+        text-align: center;
+        padding-top: 30px;
+
+        .brand {
+            font-family: Georgia, serif;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 5px;
+            color: $medium-gray;
+            text-decoration: none;
+        }
+    }
+}
+
+.signature {
+    color: $medium-gray;
+}
+
+.footer {
+    background-color: white !important;
+    font-size: 11px;
+
+    th.columns {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
-    table.stats {
-        th {
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 12px;
-            padding: 4px 5px;
-            border-bottom: 1px solid $medium-gray;
+    th {
+        text-align: center;
+        font-size: 11px;
+        color: $medium-gray;
+    }
 
-            &.right {
-                text-align: right;
-            }
-        }
+    a {
+        color: $medium-gray;
+        text-decoration: underline;
+        font-size: 11px;
+        text-align: center;
+    }
 
-        td {
-            font-size: 14px;
-            padding: 4px 5px;
+    p {
+        color: $medium-gray;
+        font-size: 11px;
+        text-align: center;
+        line-height: 1.2;
+    }
 
-            &.right {
-                text-align: right;
-            }
-        }
-
-        .title {
-            font-weight: bold;
-            background-color: $light-gray;
+    .footer-text {
+        p {
+            margin-bottom: 15px;
         }
     }
 }
@@ -96,47 +165,82 @@
 .recommendation {
     img {
         margin-bottom: 5px;
-    }
-
-    h5 {
-        font-size: 16px;
-        margin-bottom: 0px;
-    }
-
-    p {
-        font-size: 16px;
+        width: 150px;
     }
 }
 
 .banner {
     background-color: $primary-color;
+    width: 100%;
 
     .callout {
         margin-top: 16px;
         margin-bottom: 0px;
+        width: 100%;
 
         .callout-inner {
-            padding: 30px 15px 15px;
             background-color: $primary-color;
             border: 2px solid #fff;
 
             h2 {
                 color: #fff;
-                font-weight: 200;
             }
+        }
+    }
+}
+
+hr {
+    width: 94%;
+    border: 1px solid $light-gray;
+}
+
+.midsignature {
+    width: 100px;
+    margin: auto;
+}
+
+.coupon {
+    background-color: $white;
+    width: 100%;
+
+    .callout {
+        margin-top: 16px;
+        margin-bottom: 0px;
+        width: 100%;
+
+        .callout-inner {
+            background-color: $white;
+            border: 2px dashed $primary-color;
 
             h1 {
-                color: #fff;
-                text-transform: uppercase;
-                font-weight: bold;
                 margin-top: 30px;
                 margin-bottom: 30px;
             }
 
-            h6 {
-                color: #fff;
-                text-transform: uppercase;
+            h3 {
+                color: $primary-color;
                 margin-bottom: 30px;
+            }
+        }
+    }
+}
+
+.cover {
+    background-color: #80E0C4;
+    width: 100%;
+
+    .callout {
+        margin: auto;
+        margin-top: 16px;
+        margin-bottom: 0px;
+        width: 85%;
+
+        .callout-inner {
+            background-color: #80E0C4;
+            border: none;
+
+            p {
+                text-align: center;
             }
         }
     }
@@ -146,4 +250,6 @@
     background-color: none;
     border: 1px solid #fff;
     border-radius: 0px;
+    margin: 0 auto;
+    margin-bottom: 16px;
 }

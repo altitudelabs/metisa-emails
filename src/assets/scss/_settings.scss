@@ -17,7 +17,8 @@
 // ---------
 
 $primary-color: #38CEA3;
-$secondary-color: #247AA0;
+$primary-color-dark: #1D6A53;
+$secondary-color: #eda20c;
 $success-color: $primary-color;
 $warning-color: #FFE066;
 $alert-color: #F25F5C;
@@ -25,8 +26,7 @@ $light-gray: #EFF2F4;
 $medium-gray: #969996;
 $dark-gray: #484B54;
 $black: #484B54;
-$white: #fefefe;
-$pre-color: #ff6908;
+$white: #ffffff;
 $global-width: 580px;
 $global-width-small: 95%;
 $global-gutter: 16px;
@@ -56,18 +56,18 @@ $block-grid-gutter: $global-gutter;
 // -------------
 
 $global-font-weight: normal;
-$header-color: inherit;
 $global-line-height: 1.3;
-$global-font-size: 16px;
-$body-line-height: 19px;
-$header-font-family: $body-font-family;
-$header-font-weight: $global-font-weight;
-$h1-font-size: 34px;
-$h2-font-size: 30px;
-$h3-font-size: 28px;
-$h4-font-size: 24px;
-$h5-font-size: 20px;
-$h6-font-size: 18px;
+$global-font-size: 14px;
+$body-line-height: 22px;
+$top-font-family: $body-font-family;
+$top-font-weight: $global-font-weight;
+$top-font-size: 10px;
+$h1-font-size: 26px; //primary color, uppercase, bold
+$h2-font-size: 26px; //dark gray, uppercase, bold
+$h3-font-size: 18px; //white, uppercase, light
+$h4-font-size: 44px; //times new roman font
+$h5-font-size: 14px; //recommendation name
+$h6-font-size: 14px; //recommendation description
 $header-margin-bottom: 10px;
 $paragraph-margin-bottom: 10px;
 $small-font-size: 80%;
