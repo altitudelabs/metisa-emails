@@ -1,0 +1,40 @@
+---
+subject: "*|SUBJECT|*"
+---
+{{> top }}
+{{> logo }}
+{{> greetings}}
+
+<container>
+  <row>
+    <columns>
+      <p>Thanks for signing up recently! We can't wait for you to try some of our products, but apparently you haven't found anything you love yet.<br><br>Here are some things we think you may like!</p>
+    </columns>
+  </row>
+</container>
+
+{{> recommendation}}
+
+<container>
+  <row class="coupon">
+    <columns>
+      <callout class="primary">
+        <h1 style="font-size: 50px;">Get 10% off</h1>
+        <h3>on your next purchase<br>with the code</h3>
+          <button class="large inverse" href="#">MYFIRST</button>
+      </callout>
+    </columns>
+  </row>
+  <spacer size="16"></spacer>
+</container>
+
+<container>
+  <row>
+    <columns>
+      <h2>Happy Shopping</h2>
+    </columns>
+  </row>
+</container>
+
+{{> signature}}
+{{> footer }}

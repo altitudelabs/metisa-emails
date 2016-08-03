@@ -33,12 +33,12 @@ foundation new --framework emails
 
 The CLI will prompt you to give your project a name. The template will be downloaded into a folder with this name.
 
-### Manual Setup
+### Using Metisa's default templates
 
-To manually set up the template, first download it with Git:
+To use the starter kit with default email templates set up by Metisa, first download it with Git:
 
 ```bash
-git clone https://github.com/zurb/foundation-emails-template projectname
+git clone https://github.com/altitudelabs/metisa-emails projectname
 ```
 
 Then open the folder in your command line, and install the needed dependencies:
@@ -57,6 +57,29 @@ Run `npm run build` to inline your CSS into your HTML along with the rest of the
 Run `npm run litmus` to build as above, then submit to litmus for testing. *AWS S3 Account details required (config.json)*
 
 Run `npm run zip` to build as above, then zip HTML and images for easy deployment to email marketing services. 
+
+## Templates
+
+There are two sets of email templates in the src/pages directory:
+- metisa: contains the original emails Metisa uses. 
+- mailchimp: contains default emails for standard marketing campaigns.
+
+To access different pages on the browser, direct the url to the file path. 
+For example, to access "file.html" under metisa's templates, the url should be 
+> localhost:0000/metisa/file.html
+
+## SES email implementation
+
+Currently, there are no templates set up for SES due to syntax. To manually change the output files: 
+
+1. `npm run build`
+2. `cd projectname/dist` This folder contains all the output files that has combined both html and css code.
+3. Copy the files that need to be in SES format and edit the tags manually. 
+  * Mailchimp uses `*|tag|*`
+  * Mailchimp if statements: `*|IF:TAG|*Hi *|TAG|*, *|ELSE:|*Hello,*|END:IF|*`
+  * SES uses `{{tag}}`
+  * SES if statements: `{% if TAG %}Hi {{TAG}}, {% elif not TAG %} Hello, {% endif %}`
+  * Substitude accordingly
 
 ## Litmus Tests (config.json)
 

@@ -1,0 +1,57 @@
+---
+subject: REFERENCE
+---
+<!--all the possible things you can do-->
+<!--View this email, unsubscribe options-->
+{{> top }}
+<!--company logo banner-->
+{{> logo }}
+<!--Hello XXX-->
+{{> greetings}}
+
+<!--normal text-->
+<container>
+  <row>
+    <columns>
+      <h1>Header 1</h1>
+      <h2 class="text-center">centered Text</h2>
+      <p>Normal paragraph text</p>
+    </columns>
+  </row>
+</container>
+
+<!--bordered banner-->
+<container>
+  <row class="banner">
+    <columns>
+      <callout class="primary">
+        <h1 class="text-center">Bordered banner</h1>
+      </callout>
+    </columns>
+  </row>
+</container>
+
+<!--button-->
+<container>
+  <row>
+    <columns>
+      <button class="large inverse" href="#">Button</button>
+    </columns>
+  </row>
+</container>
+
+<!--recommendation list, 3 columns-->
+{{> recommendation}}
+
+<container class="graphics">
+  <spacer size="16"></spacer>
+  <row>
+    <columns class="graphics_text">
+      <img src="http://placehold.it/580x250">
+      <h1 style="height: 250px;"><br><br><br><br><mark>&nbsp;TEXT ON GRAPHICS&nbsp;</mark></h1>
+    </columns>
+  </row>
+</container>
+
+
+{{> footer }}
