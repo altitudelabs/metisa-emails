@@ -23,7 +23,7 @@ var CONFIG;
 
 // Build the "dist" folder by running all of the above tasks
 gulp.task('build',
-  gulp.series(clean, pages, sass, images, inline));
+  gulp.series(clean, pages, sass, images, inline, ses));
 
 // Build emails, run the server, and watch for file changes
 gulp.task('default',
@@ -89,6 +89,16 @@ function inline() {
     .pipe(gulp.dest('dist'));
 }
 
+// Make a copy of Mailchimp templates for SES
+function ses() {
+  return gulp.src('dist/mailchimp/*.html')
+    // Hack: Convert Mailchimp merge tag to SES
+    .pipe($.replace('*|IF:FNAME|*Hi *|TITLE:FNAME|*, *|ELSE:|*Hello,*|END:IF|*', '{% if NAME %}Hi {{FNAME}},{% elif not FNAME %}Hello,{% endif %}'))
+    // Convert *|(FIELD)|* to {{(FIELD)}}
+    .pipe($.replace(/\*\|([a-zA-Z0-9_ ]+)\|\*/g, '\{\{$1\}\}'))
+    .pipe(gulp.dest('dist/ses'));
+}
+
 // Start a server with LiveReload to preview the site in
 function server(done) {
   browser.init({
@@ -99,9 +109,9 @@ function server(done) {
 
 // Watch for file changes
 function watch() {
-  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, inline, browser.reload));
-  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, inline, browser.reload));
-  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, inline, browser.reload));
+  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, inline, ses, browser.reload));
+  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, inline, ses, browser.reload));
+  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, inline, ses, browser.reload));
   gulp.watch('src/assets/img/**/*').on('change', gulp.series(images, browser.reload));
 }
 
@@ -116,7 +126,8 @@ function inliner(css) {
     //   removeStyleTags: false,
     //   removeLinkTags: false
     // })
-    .pipe($.replace, '<!-- <style> -->', `<style>${css}</style>`);
+    .pipe($.replace, '<!-- <style> -->', `<style>${css}</style>`)
+    .pipe($.replace, '<link rel="stylesheet" type="text/css" href="/css/app.css">', '');
     // .pipe($.htmlmin, {
     //   collapseWhitespace: false,
     //   minifyCSS: true
