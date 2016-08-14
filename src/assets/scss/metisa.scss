@@ -1,0 +1,119 @@
+@import 'settings';
+@import 'foundation';
+
+h1 {
+    color: $dark-gray;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+h2 {
+    color: $dark-gray;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+h3 {
+    color: #fff;
+    font-weight: lighter;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h4 {
+    color: $dark-gray;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-transform: lowercase;
+    font-family: Times;
+    font-style: italic;
+    text-align: center;
+}
+
+h5 {
+    font-weight: bold;
+    color: $dark-gray;
+}
+
+h6 {
+    font-weight: lighter;
+    color: $dark-gray;
+}
+
+p {
+    font-size: $global-font-size;
+    margin-bottom: 15px;
+    hyphens: none;
+}
+
+a {
+    font-size: $global-font-size;
+    color: $primary-color;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.top {
+    background-color: $light-gray !important;
+
+    .logo img {
+        width: 120px !important;
+        margin: 30px auto 20px;
+    }
+}
+
+.signature {
+    color: $medium-gray;
+}
+
+.footer {
+    background-color: $light-gray !important;
+    font-size: 11px;
+
+    th.columns {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    th {
+        text-align: center;
+        font-size: 11px;
+        color: $medium-gray;
+    }
+
+    a {
+        color: $medium-gray;
+        text-decoration: underline;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    p {
+        color: $medium-gray;
+        font-size: 11px;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .footer-text {
+        p {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+hr {
+    width: 94%;
+    border: 1px solid $light-gray;
+}
+
+.button.inverse {
+    background-color: none;
+    border: 1px solid #fff;
+    border-radius: 0px;
+    margin: 0 auto;
+    margin-bottom: 16px;
+}

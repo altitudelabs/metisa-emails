@@ -1,0 +1,24 @@
+---
+layout: 'metisa'
+subject: 'Setup your account'
+---
+{{> mt.top }}
+
+<container>
+  <spacer size="16"></spacer>
+  <row>
+    <columns small="12" large="12">
+      {{{{raw}}}}
+      <p>Hi,</p>
+      <p>Thank you for joining Metisa. We help brands and marketers harness the power of data science.</p>
+      <p>You are moments away from retaining your customers in a personalised, repeatable and measurable way.</p>
+      <p>Please follow this link to setup your account for team <strong>{{ team_slug }}</strong>:</p>
+      <p><a class="link" href="{{ url }}">{{ url }}</a></p>
+      <p>Enjoy!</p>
+      <p class="signature">Team Metisa</p>
+      {{{{/raw}}}}
+    </columns>
+  </row>
+</container>
+
+{{> mt.footer }}
