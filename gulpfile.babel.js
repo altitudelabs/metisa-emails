@@ -23,7 +23,7 @@ var CONFIG;
 
 // Build the "dist" folder by running all of the above tasks
 gulp.task('build',
-  gulp.series(clean, pages, sass, images, inline, ses));
+  gulp.series(clean, pages, sass, images, mailchimp, metisa, ses, cleanMetisa));
 
 // Build emails, run the server, and watch for file changes
 gulp.task('default',
@@ -41,6 +41,12 @@ gulp.task('zip',
 // This happens every time a build starts
 function clean(done) {
   rimraf('dist', done);
+}
+
+// Delete the Metisa src html files
+// This happens after the Metisa task is done
+function cleanMetisa(done) {
+  rimraf('dist/*.html', done);
 }
 
 // Compile layouts, pages, and partials into flat HTML files
@@ -65,7 +71,7 @@ function resetPages(done) {
 
 // Compile Sass into CSS
 function sass() {
-  return gulp.src('src/assets/scss/app.scss')
+  return gulp.src('src/assets/scss/*.scss')
     .pipe($.if(!PRODUCTION, $.sourcemaps.init()))
     .pipe($.sass({
       includePaths: ['node_modules/foundation-emails/scss']
@@ -81,12 +87,20 @@ function images() {
     .pipe(gulp.dest('./dist/assets/img'));
 }
 
-// Inline CSS and minify HTML
-function inline() {
-  return gulp.src('dist/**/*.html')
-    .pipe($.if(PRODUCTION, inliner('dist/css/app.css')))
+// Create templates for Mailchimp
+function mailchimp() {
+  return gulp.src('dist/mailchimp/*.html')
+    .pipe($.if(PRODUCTION, injector('dist/css/app.css')))
     .pipe($.prettify({ indent_size: 4 }))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist/mailchimp'));
+}
+
+// Inline CSS and minify HTML templates for Metisa
+function metisa() {
+  return gulp.src('dist/*.html')
+    .pipe($.if(PRODUCTION, inliner('dist/css/metisa.css')))
+    .pipe($.prettify({ indent_size: 4 }))
+    .pipe(gulp.dest('dist/metisa'));
 }
 
 // Make a copy of Mailchimp templates for SES
@@ -109,10 +123,22 @@ function server(done) {
 
 // Watch for file changes
 function watch() {
-  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, inline, ses, browser.reload));
-  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, inline, ses, browser.reload));
-  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, inline, ses, browser.reload));
+  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, mailchimp, metisa, ses, cleanMetisa, browser.reload));
+  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, mailchimp, metisa, ses, cleanMetisa, browser.reload));
+  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, mailchimp, metisa, ses, cleanMetisa, browser.reload));
   gulp.watch('src/assets/img/**/*').on('change', gulp.series(images, browser.reload));
+}
+
+// Injects CSS into HTML and removes style tag
+function injector(css) {
+  var css = fs.readFileSync(css).toString();
+  var mqCss = siphon(css);
+
+  var pipe = lazypipe()
+    .pipe($.replace, '<!-- <style> -->', `<style>${css}</style>`)
+    .pipe($.replace, '<link rel="stylesheet" type="text/css" href="/css/app.css">', '');
+
+  return pipe();
 }
 
 // Inlines CSS into HTML, adds media query CSS into the <style> tag of the email, and compresses the HTML
@@ -121,17 +147,18 @@ function inliner(css) {
   var mqCss = siphon(css);
 
   var pipe = lazypipe()
-    // .pipe($.inlineCss, {
-    //   applyStyleTags: false,
-    //   removeStyleTags: false,
-    //   removeLinkTags: false
-    // })
+    .pipe($.inlineCss, {
+      applyStyleTags: true,
+      removeStyleTags: true,
+      applyLinkTags: true,
+      removeLinkTags: true,
+    })
     .pipe($.replace, '<!-- <style> -->', `<style>${css}</style>`)
-    .pipe($.replace, '<link rel="stylesheet" type="text/css" href="/css/app.css">', '');
-    // .pipe($.htmlmin, {
-    //   collapseWhitespace: false,
-    //   minifyCSS: true
-    // });
+    .pipe($.replace, '<link rel="stylesheet" type="text/css" href="/css/metisa.css">', '')
+    .pipe($.htmlmin, {
+      collapseWhitespace: false,
+      minifyCSS: true,
+    });
 
   return pipe();
 }
@@ -217,5 +244,3 @@ function zip() {
 
   return merge(moveTasks);
 }
-
-

@@ -1,0 +1,20 @@
+---
+layout: "metisa"
+subject: "You've been added to a team"
+---
+{{> mt.top title='Setup Your Account' }}
+<container>
+  <spacer size="16"></spacer>
+  <row>
+    <columns small="12" large="12">
+      {{{{raw}}}}
+      <p>{% if first_name %}Hi {{ first_name }},{% else %}Hi,{% endif %}</p>
+      <p>You've been invited to team <strong>{{ team_slug }}</strong>. You will be able to login to your account at this link:</p>
+      <p><a class="link" href="{{ url }}">{{ url }}</a></p>
+      <p>Enjoy!</p>
+      <p class="signature">Team Metisa</p>
+      {{{{/raw}}}}
+    </columns>
+  </row>
+</container>
+{{> mt.footer }}

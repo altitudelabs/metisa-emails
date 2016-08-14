@@ -1,0 +1,21 @@
+---
+layout: 'metisa'
+subject: 'Your store insights are ready'
+---
+{{> mt.top }}
+<container>
+  <spacer size="16"></spacer>
+  <row>
+    <columns small="12" large="12">
+      {{{{raw}}}}
+      <p>{% if first_name %}Hi {{ first_name }},{% else %}Hi,{% endif %}</p>
+      <p>Hurray! You store insights are ready.</p>
+      <p>Check out your predictive insights including customer lifetime value, churn, customer personas and product recommendations <a href="{{ url }}">here</a>.</p>
+      <p>What's next? Integrate email marketing to start creating marketing strategies for different customer segments and optimise them over time.</p>
+      <p>Enjoy!</p>
+      <p class="signature">Metisa Team</p>
+      {{{{/raw}}}}
+    </columns>
+  </row>
+</container>
+{{> mt.footer }}
