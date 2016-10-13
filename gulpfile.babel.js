@@ -23,7 +23,7 @@ var CONFIG;
 
 // Build the "dist" folder by running all of the above tasks
 gulp.task('build',
-  gulp.series(clean, pages, sass, images, mailchimp, metisa, ses, cleanMetisa));
+  gulp.series(clean, pages, sass, images, mailchimp, growth, metisa, ses, cleanMetisa));
 
 // Build emails, run the server, and watch for file changes
 gulp.task('default',
@@ -95,6 +95,14 @@ function mailchimp() {
     .pipe(gulp.dest('dist/mailchimp'));
 }
 
+// Create templates for Metisa Growth
+function growth() {
+  return gulp.src('dist/growth/*.html')
+    .pipe($.if(PRODUCTION, injector('dist/css/growth.css')))
+    .pipe($.prettify({ indent_size: 4 }))
+    .pipe(gulp.dest('dist/growth'));
+}
+
 // Inline CSS and minify HTML templates for Metisa
 function metisa() {
   return gulp.src('dist/*.html')
@@ -123,9 +131,9 @@ function server(done) {
 
 // Watch for file changes
 function watch() {
-  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, mailchimp, metisa, ses, cleanMetisa, browser.reload));
-  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, mailchimp, metisa, ses, cleanMetisa, browser.reload));
-  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, mailchimp, metisa, ses, cleanMetisa, browser.reload));
+  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, mailchimp, growth, metisa, ses, cleanMetisa, browser.reload));
+  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, mailchimp, growth, metisa, ses, cleanMetisa, browser.reload));
+  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, mailchimp, growth, metisa, ses, cleanMetisa, browser.reload));
   gulp.watch('src/assets/img/**/*').on('change', gulp.series(images, browser.reload));
 }
 
