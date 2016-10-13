@@ -1,0 +1,132 @@
+@import 'settings';
+@import 'foundation';
+
+$body-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+.top {
+    background-color: $primary-color !important;
+
+    th.columns {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    th.archive th {
+        text-align: right;
+    }
+
+    p {
+        color: #fff;
+        font-size: 11px;
+        margin-bottom: 0px;
+    }
+
+    a {
+        color: #fff;
+        font-size: 11px;
+    }
+}
+
+.hero {
+    background-color: $primary-color;
+    padding-bottom: 0px !important;
+
+    h1 {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        font-size: 30px;
+        color: #fff;
+        text-align: center;
+    }
+
+    p {
+        padding-left: 30px;
+        padding-right: 30px;
+        color: #fff;
+        text-align: center;
+    }
+
+    a {
+        color: #fff;
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width: 596px) {
+        p {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}
+
+.feature {
+    border-bottom: 2px solid $light-gray;
+
+    h3 {
+        font-size: 20px;
+    }
+
+    .separator {
+        width: 50px;
+        min-height: 3px;
+        background-color: $primary-color;
+        margin-top: 20px;
+        margin-bottom: 15px
+    }
+
+    @media only screen and (max-width: 596px) {
+        .separator {
+            margin-top: 5px;
+            margin-bottom: 10px
+        }
+    }
+}
+
+.call-to-action {
+    background-color: $dark-gray;
+
+    h3 {
+        color: #fff;
+        text-align: center;
+    }
+
+    .button a {
+        font-weight: normal;
+    }
+}
+
+.footer {
+    background-color: $light-gray !important;
+    font-size: 11px;
+
+    th.columns {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    th {
+        text-align: center;
+        font-size: 11px;
+        color: $medium-gray;
+    }
+
+    a {
+        color: $medium-gray;
+        text-decoration: underline;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    p {
+        color: $medium-gray;
+        font-size: 11px;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .footer-text {
+        p {
+            margin-bottom: 15px;
+        }
+    }
+}
