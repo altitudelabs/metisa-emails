@@ -1,0 +1,85 @@
+---
+layout: 'metisa'
+subject: 'Weekly Report'
+---
+{{> mt.top }}
+<container class="weekly-report">
+  <spacer size="16"></spacer>
+  {{{{raw}}}}
+  <row>
+    <columns small="12" large="12">
+      <h1>{% store_name %}: Weekly Report</h1>
+      <h2>{% current_month %}</h2>
+      <h5>Summary</h5>
+      <p>Hope you had a great weekend! Here's a summary of your store for the month to date:</p>
+      <table class="table table-acquisition">
+        <thead>
+          <tr><th></th><th>{% last_period %}</th><th>{% this_period %}</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sales</td><td>{% summary.last_period.sales|floatformat:"0" %}</td><td>{% summary.this_period.sales|floatformat:"0" %}</td></tr>
+          <tr><td>Total CLV*</td><td>{% summary.last_period.clv|floatformat:"0" %}</td><td>{% summary.this_period.clv|floatformat:"0" %}</td></tr>
+        </tbody>
+      </table>
+      <div class="footnote">* Estimated present value of future sales from your existing customers.</div>
+      <p>We suggest the following actions to grow your store:</p>
+      <ul>
+        <li>{{ priorities.0.action.name }} <a href="{% priorities.0.action.url %}">Act now »</a></li>
+        <li>{{ priorities.1.action.name }} <a href="{% priorities.1.action.url %}">Act now »</a></li>
+        <li>{{ priorities.2.action.name }} <a href="{% priorities.2.action.url %}">Act now »</a></li>
+      </ul>
+    </columns>
+  </row>
+  <row>
+    <columns small="12" large="12">
+      <h5>Acquisition <a href="{% acquisition.url %}">dashboard »</a></h5>
+      <p>On the acquisition front, you've acquired {% acquisition.this_period.new %} new customer{% acquisition.this_period.new|pluralize %} (valued at ${% acquisition.this_period.total_clv %}) for the month to date, compared to {% acquisition.last_period.new %} last month:</p>
+      <table class="table table-acquisition">
+        <thead>
+          <tr><th></th><th>{% last_period %}</th><th>{% this_period %}</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>New customers</td><td>{% acquisition.last_period.new|floatformat:"0" %}</td><td>{% acquisition.this_period.new|floatformat:"0" %}</td></tr>
+          <tr><td>Estimated CLV per customer</td><td>{% acquisition.last_period.clv|floatformat:"0" %}</td><td>{% acquisition.this_period.clv|floatformat:"0" %}</td></tr>
+          <tr><td>CLV gained*</td><td>{% acquisition.last_period.total_clv|floatformat:"0" %}</td><td>{% acquisition.this_period.total_clv|floatformat:"0" %}</td></tr>
+        </tbody>
+      </table>
+      <div class="footnote">* New customers x Estimated CLV per customer</div>
+    </columns>
+  </row>
+  <row>
+    <columns small="12" large="12">
+      <h5>Retention <a href="{% retention.url %}">dashboard »</a></h5>
+      <p>On the retention front, you've converted {% retention.this_period.total_to_active %} new active customer{{ retention.this_period.total_to_active|pluralize }} and created ${{ retention.total_to_active_clv }} of value for the month to date:</p>
+      <table class="table table-retention">
+        <thead>
+          <tr><th>Conversions</th><th>{% last_period %}</th><th>{% this_period %}</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Member → Active</td>
+            <td>{% retention.last_period.member_to_active|floatformat:"0" %} (+${% retention.last_period.member_to_active_clv|floatformat:"0" %} CLV)</td>
+            <td>{% retention.this_period.member_to_active|floatformat:"0" %} (+${% retention.this_period.member_to_active_clv|floatformat:"0" %} CLV)</td>
+          </tr>
+          <tr>
+            <td>One-time → Active</td>
+            <td>{% retention.last_period.one_time_to_active|floatformat:"0" %} (+${% retention.last_period.one_time_to_active|floatformat:"0" %} CLV)</td>
+            <td>{% retention.this_period.one_time_to_active|floatformat:"0" %} (+${% retention.this_period.one_time_to_active|floatformat:"0" %} CLV)</td>
+          </tr>
+          <tr>
+            <td>At-risk → Active</td>
+            <td>{% retention.last_period.at_risk_to_active|floatformat:"0" %} (+${% retention.last_period.at_risk_to_active_clv|floatformat:"0" %} CLV)</td>
+            <td>{% retention.this_period.at_risk_to_active|floatformat:"0" %} (+${% retention.this_period.at_risk_to_active_clv|floatformat:"0" %} CLV)</td>
+          </tr>
+          <tr>
+            <td>Lost → Active</td>
+            <td>{% retention.last_period.lost_to_active|floatformat:"0" %} (+${% retention.last_period.lost_to_active_clv|floatformat:"0" %} CLV)</td>
+            <td>{% retention.this_period.lost_to_active|floatformat:"0" %} (+${% retention.this_period.lost_to_active_clv|floatformat:"0" %} CLV)</td>
+          </tr>
+        </tbody>
+      </table>
+    </columns>
+  </row>
+  {{{{/raw}}}}
+</container>
+{{> mt.footer }}

@@ -117,3 +117,53 @@ hr {
     margin: 0 auto;
     margin-bottom: 16px;
 }
+
+.weekly-report {
+    h1 {
+        margin-bottom: 5px;
+    }
+
+    h2 {
+        font-size: 18px;
+        text-transform: none;
+        color: $medium-gray;
+        font-weight: normal;
+        margin-bottom: 25px;
+    }
+
+    h5 {
+        font-size: 16px;
+        border-bottom: 1px solid $medium-gray;
+        margin-bottom: 15px;
+        padding-bottom: 3px;
+
+        a {
+            font-size: 16px;
+        }
+    }
+
+    .footnote {
+        color: $medium-gray;
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .table {
+        table-layout: fixed;
+        margin-bottom: 10px;
+
+        th {
+            font-weight: bold;
+            background-color: $light-gray;
+            padding: 5px;
+        }
+
+        td {
+            border-bottom: 1px solid $light-gray;
+            padding: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
