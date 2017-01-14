@@ -23,7 +23,7 @@ var CONFIG;
 
 // Build the "dist" folder by running all of the above tasks
 gulp.task('build',
-  gulp.series(clean, pages, sass, images, mailchimp, growth, metisa, ses, cleanMetisa));
+  gulp.series(clean, pages, sass, images, ses, growth, metisa));
 
 // Build emails, run the server, and watch for file changes
 gulp.task('default',
@@ -41,12 +41,6 @@ gulp.task('zip',
 // This happens every time a build starts
 function clean(done) {
   rimraf('dist', done);
-}
-
-// Delete the Metisa src html files
-// This happens after the Metisa task is done
-function cleanMetisa(done) {
-  rimraf('dist/*.html', done);
 }
 
 // Compile layouts, pages, and partials into flat HTML files
@@ -87,12 +81,12 @@ function images() {
     .pipe(gulp.dest('./dist/assets/img'));
 }
 
-// Create templates for Mailchimp
-function mailchimp() {
-  return gulp.src('dist/mailchimp/*.html')
+// Create SES templates
+function ses() {
+  return gulp.src('dist/ses/*.html')
     .pipe($.if(PRODUCTION, injector('dist/css/app.css')))
     .pipe($.prettify({ indent_size: 4 }))
-    .pipe(gulp.dest('dist/mailchimp'));
+    .pipe(gulp.dest('dist/ses'));
 }
 
 // Create templates for Metisa Growth
@@ -105,20 +99,10 @@ function growth() {
 
 // Inline CSS and minify HTML templates for Metisa
 function metisa() {
-  return gulp.src('dist/*.html')
+  return gulp.src('dist/metisa/*.html')
     .pipe($.if(PRODUCTION, inliner('dist/css/metisa.css')))
     .pipe($.prettify({ indent_size: 4 }))
     .pipe(gulp.dest('dist/metisa'));
-}
-
-// Make a copy of Mailchimp templates for SES
-function ses() {
-  return gulp.src('dist/mailchimp/*.html')
-    // Hack: Convert Mailchimp merge tag to SES
-    .pipe($.replace('*|IF:FNAME|*Hi *|TITLE:FNAME|*, *|ELSE:|*Hello,*|END:IF|*', '{% if NAME %}Hi {{FNAME}},{% elif not FNAME %}Hello,{% endif %}'))
-    // Convert *|(FIELD)|* to {{(FIELD)}}
-    .pipe($.replace(/\*\|([a-zA-Z0-9_ ]+)\|\*/g, '\{\{$1\}\}'))
-    .pipe(gulp.dest('dist/ses'));
 }
 
 // Start a server with LiveReload to preview the site in
@@ -131,9 +115,9 @@ function server(done) {
 
 // Watch for file changes
 function watch() {
-  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, mailchimp, growth, metisa, ses, cleanMetisa, browser.reload));
-  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, mailchimp, growth, metisa, ses, cleanMetisa, browser.reload));
-  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, mailchimp, growth, metisa, ses, cleanMetisa, browser.reload));
+  gulp.watch('src/pages/**/*.html').on('change', gulp.series(pages, ses, growth, metisa, browser.reload));
+  gulp.watch(['src/layouts/**/*', 'src/partials/**/*']).on('change', gulp.series(resetPages, pages, growth, metisa, ses, browser.reload));
+  gulp.watch(['../scss/**/*.scss', 'src/assets/scss/**/*.scss']).on('change', gulp.series(resetPages, sass, pages, ses, growth, metisa, browser.reload));
   gulp.watch('src/assets/img/**/*').on('change', gulp.series(images, browser.reload));
 }
 
@@ -192,7 +176,7 @@ function aws() {
 
   return gulp.src('./dist/assets/img/*')
     // publisher will add Content-Length, Content-Type and headers specified above
-    // If not specified it will set x-amz-acl to public-read by default
+    // If not specified it will set x-amz-acl to public-read by ses
     .pipe(publisher.publish(headers))
 
     // create a cache file to speed up consecutive uploads

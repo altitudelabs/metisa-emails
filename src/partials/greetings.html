@@ -2,7 +2,7 @@
   <spacer size="16"></spacer>
   <row>
     <columns>
-      <p>*|IF:FNAME|*Hi *|TITLE:FNAME|*, *|ELSE:|*Hello,*|END:IF|*</p>
+      <p>{% if FNAME %}Hi {{FNAME}},{% else %}Hello,{% endif %}</p>
     </columns>
   </row>
 </container>
