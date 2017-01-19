@@ -2,7 +2,9 @@
   <spacer size="16"></spacer>
   <row>
     <columns>
-      <p>{% if FNAME %}Hi {{FNAME}},{% else %}Hello,{% endif %}</p>
+      {{{{raw}}}}
+      <p>{% if FNAME %}Hi {{FNAME|capfirst}},{% else %}Hello,{% endif %}</p>
+      {{{{/raw}}}}
     </columns>
   </row>
 </container>
