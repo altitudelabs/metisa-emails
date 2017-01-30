@@ -8,10 +8,12 @@ subject: "{{SUBJECT}}"
 <container>
   <row class="banner">
     <columns>
+      {{{{raw}}}}
       <callout>
         <h1>New Year. New You.</h1>
-        <p>This new year is all about making big changes. Start by changing your look with some of these styles.</p>
+        <p>Year {{ TODAY|year }} is all about making big changes. Start by changing your look with some of these styles.</p>
       </callout>
+      {{{{/raw}}}}
     </columns>
   </row>
   <spacer size="16"></spacer>

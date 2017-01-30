@@ -16,13 +16,15 @@ subject: "{{SUBJECT}}"
 <container>
   <row class="coupon">
     <columns>
+      {{{{raw}}}}
       <callout class="primary">
         <h1>Free Shipping<br>on Any Order of $50 or More</p>
-        <h3>Use code <b>WEMISSYOU</b> online at checkout<br>Offer valid through August 2016</h3>
+        <h3>Use code <b>WEMISSYOU</b> online at checkout<br>Offer valid through {{ TODAY|date:"F Y" }}</h3>
         <center>
           <button class="large inverse radius" href="#">Shop Now</button>
         </center>
       </callout>
+      {{{{/raw}}}}
     </columns>
   </row>
   <spacer size="16"></spacer>
