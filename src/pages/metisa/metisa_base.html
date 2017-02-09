@@ -1,0 +1,18 @@
+---
+layout: 'metisa'
+subject: '3 Months Free Trial'
+---
+{{> mt.top }}
+<container>
+  <spacer size="16"></spacer>
+  <row>
+    <columns small="12" large="12">
+      {{{{raw}}}}
+      <p>{% if FNAME %}Hi {{ FNAME|capfirst }},{% else %}Hi,{% endif %}</p>
+      <p></p>
+      <p class="signature">Metisa</p>
+      {{{{/raw}}}}
+    </columns>
+  </row>
+</container>
+{{> mt.footer }}

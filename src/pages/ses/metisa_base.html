@@ -1,0 +1,22 @@
+---
+layout: 'metisa'
+subject: 'Welcome to Metisa'
+---
+{{> mt.top }}
+<container>
+  <spacer size="16"></spacer>
+  <row>
+    <columns small="12" large="12">
+      {{{{raw}}}}
+      <p>{% if FNAME %}Hi {{FNAME|capfirst}},{% else %}Hello,{% endif %}</p>
+      <p>Welcome to Metisa.</p>
+      <p>We are excited to be working with you to retain your customers with data science. So far, we have analyzed over US$100 million of transactions for brands and many of them have seen double-digit growth in customer retention.</p>
+      <p>To get started, integrate your store and learn about your customers through our predictive insights including lifetime value, churn, personas and product recommendations.</p>
+      <p>To act on these insights, use our email integrations to create marketing strategies for different customer segments and optimise them over time.</p>
+      <p>If you need help at any point, or want to chat, feel free to drop us a line.</p>
+      <p class="signature">Metisa</p>
+      {{{{/raw}}}}
+    </columns>
+  </row>
+</container>
+{{> mt.footer }}

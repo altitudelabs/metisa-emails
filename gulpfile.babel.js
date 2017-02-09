@@ -101,6 +101,7 @@ function growth() {
 function metisa() {
   return gulp.src('dist/metisa/*.html')
     .pipe($.if(PRODUCTION, inliner('dist/css/metisa.css')))
+    .pipe($.if(!PRODUCTION, injector('dist/css/metisa.css')))
     .pipe($.prettify({ indent_size: 4 }))
     .pipe(gulp.dest('dist/metisa'));
 }
@@ -128,7 +129,8 @@ function injector(css) {
 
   var pipe = lazypipe()
     .pipe($.replace, '<!-- <style> -->', `<style>${css}</style>`)
-    .pipe($.replace, '<link rel="stylesheet" type="text/css" href="/css/app.css">', '');
+    .pipe($.replace, '<link rel="stylesheet" type="text/css" href="/css/app.css">', '')
+    .pipe($.replace, '<link rel="stylesheet" type="text/css" href="../css/metisa.css">', '');
 
   return pipe();
 }
