@@ -51,8 +51,9 @@ p {
 
 a {
     font-size: $global-font-size;
+    font-weight: bold;
     color: $primary-color;
-    text-decoration: underline;
+    text-decoration: none;
     text-align: center;
 }
 
@@ -86,7 +87,7 @@ a {
 
     a {
         color: $medium-gray;
-        text-decoration: underline;
+        text-decoration: none;
         font-size: 11px;
         text-align: center;
     }
@@ -164,6 +165,36 @@ hr {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+    }
+
+    .stat-wrapper {
+        p {
+            margin-bottom: 5px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .stat-lg {
+            font-size: 26px;
+            font-weight: bold;
+            color: $primary-color;
+        }
+    }
+
+    &.fun-fact {
+        p, a {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+
+    &.plans {
+        p {
+            margin: 0;
         }
     }
 }
