@@ -9,17 +9,17 @@ subject: 'Weekly Report'
     <!-- Summary -->
     <row>
         <columns small="12" large="12">
-            <h1>{% store_name %}: Weekly Report</h1>
-            <h2>{% this_period %}</h2>
+            <h1>{{ store_name }}: Weekly Report</h1>
+            <h2>{{ this_period }}</h2>
             <h5>Summary</h5>
-            <p>Hope you had a great weekend! Here's a summary of your store this week:</p>
+            <p>Hope you had a great weekend! Here's this week's summary of your store:</p>
             <!-- Primary stats -->
             <row>
                 <columns small="12" large="12">
                     <div class="stat-wrapper">
-                        <a class="stat-wrapper" href="http://askmetisa.com">
-                            <p class="stat-lg text-center">$294</p>
-                            <p class="text-center">Extra sales from Widgets</p>
+                        <a href="{{ widgets_url }}">
+                            <p class="stat-lg text-center">${{ summary.headline_stat_1.value }}</p>
+                            <p class="text-center">{{ summary.headline_stat_1.name }}</p>
                         </a>
                     </div>
                 </columns>
@@ -27,22 +27,27 @@ subject: 'Weekly Report'
             <row>
                 <columns small="12" large="12">
                     <div class="stat-wrapper">
-                        <a href="http://askmetisa.com">
-                            <p class="stat-lg text-center">49</p>
-                            <p class="text-center">New Customers</p>
+                        <a href="{{ acquisition_url }}">
+                            <p class="stat-lg text-center">{{ summary.headline_stat_2.value }}</p>
+                            <p class="text-center">{{ summary.headline_stat_2.name }}</p>
                         </a>
                     </div>
                 </columns>
             </row>
             <!-- Secondary stats -->
             <p>
-                Your store sold a total of <strong>174 items</strong> last week <strong>worth $2,557</strong>.
-                Of those, <strong>Color Intrigue Gel Eyeliner With Brush Black</strong> was bought the most (<strong>23</strong> were sold).
-                This week you've also <strong>converted {% total_to_active %} customers</strong> into Active customers, <strong>{% atrisk_or_lost_to_active_percent %}%</strong> of which were old customers who are re-engaged with your brand.
+                For {{ current_month }} so far, your store has sold <strong>{{ summary.total_items_sold }} items</strong>, worth a total of <strong>${{ summary.total_sales }}</strong>.
+                Of those, <strong>{{ summary.bestseller }}</strong> appears to be the most popular (customers bought <strong>{{ summary.bestseller_qty }} pieces</strong>).
+                {% if summary.total_to_active %}
+                Among your customers, <strong>{{ summary.total_to_active }} just became part of your most valuable "Active" segment</strong>.
+                {% endif %}
+                {% if summary.disengaged_to_active %}
+                Of those, <strong>{{ summary.disengaged_to_active }} previously "At-risk" or "Lost" have returned</strong> to buy from you once again!
+                {% endif %}
             </p>
             <p>
                 Want to view more detailed stats? Visit your store
-                <a href="{% acquisition.url %}">dashboard</a>.
+                <a href="{{ acquisition_url }}">dashboard</a>!
             </p>
         </columns>
     </row>
@@ -51,12 +56,12 @@ subject: 'Weekly Report'
     {% if priorities %}
     <row>
         <columns small="12" large="12">
-            <h5>Opportunities <a href="{% opportunities.url %}">see all »</a></h5>
+            <h5>Opportunities <a href="{{ priorities.0.action.url }}">see all »</a></h5>
             <p>While you were busy making customers happy, I've figured out some opportunities to improve your business. Here they are:</p>
             <ul>
-                <li>{% priorities.0.action.name %} <a href="{% priorities.0.action.url %}">Act now »</a></li>
-                <li>{% priorities.1.action.name %} <a href="{% priorities.1.action.url %}">Act now »</a></li>
-                <li>{% priorities.2.action.name %} <a href="{% priorities.2.action.url %}">Act now »</a></li>
+                <li>{{ priorities.0.action.name }} <a href="{{ priorities.0.action.url }}">Act now »</a></li>
+                <li>{{ priorities.1.action.name }} <a href="{{ priorities.1.action.url }}">Act now »</a></li>
+                <li>{{ priorities.2.action.name }} <a href="{{ priorities.2.action.url }}">Act now »</a></li>
             </ul>
         </columns>
     </row>
@@ -69,10 +74,14 @@ subject: 'Weekly Report'
     <spacer size="28"></spacer>
     <row>
         <columns small="12" large="12">
-            <p>The product your customers viewed the most was the <a href="#">Ceramide Plump Perfect Firming Facial Mask</a>. I counted 614 customers fiddling with it in your store!</p>
+            {% if widget_top_product.count %}
+            <p>The most well-received product that was recommended to your customers is <a href="{{ widget_top_product.url }}">{{ widget_top_product.name }}</a>. I caught happy customers stealing {{ widget_top_product.count }} looks at it this week!</p>
+            {% elif not widget_top_product.count %}
+            <p>Tip: Stores that turn on <a href="{{ widgets_url }}">Widgets</a> typically experience 10% more sales on average through personalised recommendations. Activation is easy, no coding required!</p>
+            <p class="btn"><a href="{{ widgets_url }}" class="btn-default">Get Started with Widgets</a></p>
+            {% endif %}
         </columns>
     </row>
-    <spacer size="12"></spacer>
 </container>
 <spacer size="12"></spacer>
 
@@ -81,13 +90,13 @@ subject: 'Weekly Report'
     <row>
         <columns small="12" large="12">
             <p>
-                Your team is on Metisa's <strong>Basic plan</strong>, {{ serviceplan_description }} which is free to use for as long as you want for teams of all sizes.
-                {{ serviceplan_call_to_action }} Interested in unlimited archive access and integrations, single sign-on, custom data retention, and more?
-                <a href="https://askmetisa.com/pricing">Check out our paid plans</a> to learn all about it.
+                Your team is on Metisa's <strong>{{ serviceplan.name }}</strong> plan, {{ serviceplan.description }} {{ serviceplan.cta }}
+                {% if serviceplan.cta %}
+                <a href="https://askmetisa.com/pricing?utm_source=weekly_report&utm_campaign=weekly_report">Check out our paid plans</a> to learn all about it.
+                {% endif %}
             </p>
         </columns>
     </row>
-    <spacer size="12"></spacer>
+    {{{{/raw}}}}
 </container>
-{{{{/raw}}}}
 {{> mt.footer }}
